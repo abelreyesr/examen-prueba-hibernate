@@ -8,7 +8,7 @@
 		<!-- Database Connection Settings -->
 		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 		<!-- Això ho heu de canviar per les vostres dades -->
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/brawlstars?createDatabaseIfNotExist=true</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/examenHibernate?createDatabaseIfNotExist=true</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">super3</property>
 
@@ -32,8 +32,11 @@
 		<!-- AQUÍ POSEU LES CLASSES QUE REPRESENTEN TAULES QUE FEU SERVIR -->
 		<!-- Els enums (Pegi, Genere) NO van aquí: no són entitats -->
 		<!-- <mapping class="introHibernate.Videojoc"/> -->
-
-		<mapping class="catan.Hexagon"/>
+		<mapping class="modelDades.Classe"/>
+		<mapping class="modelDades.Brawler"/>
+		<mapping class="modelDades.Partida"/>
+		<mapping class="modelDades.PartidaRanked"/>
+		<mapping class="modelDades.PartidaAmistosa"/>
 	</session-factory>
 </hibernate-configuration>
 

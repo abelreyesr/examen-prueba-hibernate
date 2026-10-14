@@ -230,7 +230,7 @@ public final class Correccio {
 	}
 
 	private static String num(double d) {
-		return String.format(Locale.of("ca", "ES"), "%.2f", d);
+		return String.format(new Locale.Builder().setLanguage("ca").setRegion("ES").build(), "%.2f", d);
 	}
 
 	private static String format(Object o) {
