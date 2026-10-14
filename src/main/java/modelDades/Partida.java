@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.DynamicInsert;
 
 import jakarta.persistence.Column;
@@ -28,10 +29,9 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name="partida")
 @DynamicInsert
-//revisar por que el inheritance y discriminator. es abstracta, pero no hay ningun cambio entre amistosa y ranked, solamente el tipo. si hubiese mas como se haría
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipus")
-public class Partida {
+public abstract class Partida {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,11 +46,10 @@ public class Partida {
     @Column(name="descripcio", nullable=false)
 	private String descripcio;
 	
-	@NotNull(message = "La recompensa és obligatoria")
     @Column(name="recompensa_trofeus", nullable=false)
 	private int recompensaTrofeus;
 	
-    @Column(name="cost_vida")
+    @Column(name="cost_vida", nullable=false)
 	private double costVida;
 
     @OneToMany(mappedBy = "partidaActiva")
@@ -71,11 +70,10 @@ public class Partida {
 		this.costVida = costVida;
 	}
 
-	// revisar si aqui si que se ponen los brawlers (pq en classe no estaban ya que habia recursividad, no se si aqui ponerlo)
 	@Override
 	public String toString() {
 		return "Partida [id=" + id + ", titol=" + titol + ", descripcio=" + descripcio + ", recompensaTrofeus="
-				+ recompensaTrofeus + ", costVida=" + costVida + "]";
+				+ recompensaTrofeus + ", costVida=" + costVida + ", tipus="+ Hibernate.getClass(this).getSimpleName() +"]";
 	}
 
 	@Override
@@ -131,21 +129,12 @@ public class Partida {
 		return id;
 	}
 
-	//revisar si hacen falta getters y setters de estos
 	public Set<Brawler> getParticipants() {
 		return participants;
 	}
 
-	public void setParticipants(Set<Brawler> participants) {
-		this.participants = participants;
-	}
-
 	public Set<Brawler> getCompletadors() {
 		return completadors;
-	}
-
-	public void setCompletadors(Set<Brawler> completadors) {
-		this.completadors = completadors;
 	}
 
 

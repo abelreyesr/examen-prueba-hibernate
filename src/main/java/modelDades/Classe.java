@@ -40,12 +40,10 @@ public class Classe {
     @Column(name="habilitat", nullable=false)
 	private String habilitat;
 	
-	@NotNull(message = "Ha de tenir dany")
     @Column(name="dany", nullable=false)
 	private double dany;
 
-	//revisar por que es necesario esto en este lado si no es columna. por que el mapped by "classe" (de donde viene) y el eager. onetomany pq una classe la pueden tener muchos brawlers
-    @OneToMany(mappedBy = "classe", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "classe")
 	private List<Brawler> brawlers = new ArrayList<>();
 	
     
@@ -76,7 +74,7 @@ public class Classe {
 		this.habilitat = habilitat;
 	}
 
-	public Number getDany() {
+	public double getDany() {
 		return dany;
 	}
 
@@ -84,13 +82,8 @@ public class Classe {
 		this.dany = dany;
 	}
 
-	//revisar si hacen falta getters y setters de esto
 	public List<Brawler> getBrawlers() {
 		return brawlers;
-	}
-
-	public void setBrawlers(List<Brawler> brawlers) { 
-		this.brawlers = brawlers;
 	}
 
 	public Integer getId() {
